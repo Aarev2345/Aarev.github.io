@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>htmlMap</title>
+<meta http-equiv='content-type' charset='utf-8'>
+<meta name='viewport' content='width=device-width'>
+</head>
+<body>
+<!-- 埋め込みマップのdivタグ。マップサイズはwidth（幅）とheight（高さ）で決まる -->
+<div id='mapcontainer' style='width:100%; height:900px; z-index:0;'></div>
+
+<!-- 以下LeafletのJavaScriptとCSS -->
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.3.0/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.3.0/dist/leaflet.js'></script>
+
+<script>
+function init_map() {
+
+    var map = L.map('mapcontainer');
+    map.setView([35.448510, 135.337407], 16); //初期の中心位置とズームレベルを設定(西舞鶴市を初期値にする)
+
+    //マップタイルを読み込み、引用元を記載する
+    L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', 
+        {attribution: "<a href='https://maps.gsi.go.jp/development/ichiran.html'> ©OpenStreetMap </a>"}).addTo(map);
+
+    //マーカーの画像
+        var aIcon= L.icon({
+	    iconUrl:'/wp-content/uploads/ico/telharu-Icon-red-75.pn',
+	    iconSize:[75,75],
+	    iconAnchor:[37,75],
+	    popupAnchor:[0,-70]
+	    });
+    
+    //マーカーの配置
+       L.marker([35.452868, 135.343627])
+       .on('contextmenu', function(e){
+           window.open( "https://www.google.co.jp/maps/place/"+e.latlng.lat+","+e.latlng.lng+"/@"+e.latlng.lat+","+e.latlng.lng+",15z/data");
+       }).addTo(map);
+
+       L.marker([35.410192, 135.345347])//池内学園 池内幼稚園
+       .on('contextmenu', function(e){
+           window.open( "https://www.google.co.jp/maps/place/"+e.latlng.lat+","+e.latlng.lng+"/@"+e.latlng.lat+","+e.latlng.lng+",15z/data");
+       }).addTo(map);
+
+       L.marker([35.450688, 135.342912])//倉谷口
+       .on('contextmenu', function(e){
+           window.open( "https://www.google.co.jp/maps/place/"+e.latlng.lat+","+e.latlng.lng+"/@"+e.latlng.lat+","+e.latlng.lng+",15z/data");
+       }).addTo(map);
+
+       L.marker([35.449468, 135.345684])//上安　自動車学校前
+       .on('contextmenu', function(e){
+           window.open( "https://www.google.co.jp/maps/place/"+e.latlng.lat+","+e.latlng.lng+"/@"+e.latlng.lat+","+e.latlng.lng+",15z/data");
+       }).addTo(map);
+
+       L.marker([35.453009, 135.357603])//天台A
+       .on('contextmenu', function(e){
+           window.open( "https://www.google.co.jp/maps/place/"+e.latlng.lat+","+e.latlng.lng+"/@"+e.latlng.lat+","+e.latlng.lng+",15z/data");
+       }).addTo(map);
+
+       L.marker([35.448072, 135.350990])//福来東バス停
+       .on('contextmenu', function(e){
+           window.open( "https://www.google.co.jp/maps/place/"+e.latlng.lat+","+e.latlng.lng+"/@"+e.latlng.lat+","+e.latlng.lng+",15z/data");
+       }).addTo(map);
+
+       L.marker([])//境谷A
+       .on('contextmenu', function(e){
+           window.open( "https://www.google.co.jp/maps/place/"+e.latlng.lat+","+e.latlng.lng+"/@"+e.latlng.lat+","+e.latlng.lng+",15z/data");
+       }).addTo(map);
+
+       L.marker([])//境谷B
+       .on('contextmenu', function(e){
+           window.open( "https://www.google.co.jp/maps/place/"+e.latlng.lat+","+e.latlng.lng+"/@"+e.latlng.lat+","+e.latlng.lng+",15z/data");
+       }).addTo(map);
+
+       L.marker([])//荘苑
+       .on('contextmenu', function(e){
+           window.open( "https://www.google.co.jp/maps/place/"+e.latlng.lat+","+e.latlng.lng+"/@"+e.latlng.lat+","+e.latlng.lng+",15z/data");
+       }).addTo(map);
+
+    //ラインの表示
+       var Line=L.polyline([
+    [35.453039, 135.357614],
+    [35.445321, 135.346891],
+    [35.445203, 135.342096],
+    [35.448001, 135.342356],
+    [35.448666, 135.342867],
+    [35.450696, 135.342812],
+    [35.451647, 135.343258],
+    [35.452868, 135.343627],
+],{
+    "color": "#00008b",
+    "weight": 5,
+    dashArray: [20, 10]
+}).addTo(map);//点線
+
+var Line=L.polyline([
+    [35.450696, 135.342812],
+    [35.450707, 135.343437],
+    [35.452550, 135.348341],
+    [35.452874, 135.355095],
+    [35.453548, 135.356819],
+    [35.453039, 135.357614],
+],{
+    "color": "#00008b",
+    "weight": 5,
+    dashArray: [20, 10]//点線
+
+}).addTo(map);
+
+var Line = L.polyline([
+    [35.66413037753069,139.75278854370114],
+    [35.67214927327908,139.76523399353027],
+    [35.68888176518044,139.77107048034668],
+    [35.69703758268826,139.76660728454587]
+],{
+    "color": "#FF0000",
+    "weight": 5,
+    "opacity": 0.6
+}).addTo(map);
+
+}
+    //ダウンロード時に初期化する
+    window.addEventListener('DOMContentLoaded', init_map());
+
+</script>
+</body>
+</html>

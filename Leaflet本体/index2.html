@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>htmlMap</title>
+<meta http-equiv='content-type' charset='utf-8'>
+<meta name='viewport' content='width=device-width'>,
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <div id="navArea">
+        <nav>
+          <div class="inner">
+            <ul>
+              <li><a href="file:///Z:/%E7%B7%8F%E5%90%88%E8%A3%BD%E4%BD%9C/Leaflet%E6%9C%AC%E4%BD%93/inex.1.html">青バス①時刻表</a></li>
+              <li><a href="file:///Z:/%E7%B7%8F%E5%90%88%E8%A3%BD%E4%BD%9C/Leaflet%E6%9C%AC%E4%BD%93/index2.html">青バス②時刻表</a></li>
+              <li><a href="#">黄バス①時刻表</a></li>
+            </ul>
+          </div>
+        </nav>
+  
+        <div class="toggle-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+  
+        <div id="mask"></div>
+      </div>
+  
+      <main>
+        <h1></h1>
+      </main>
+      <script src="script.js"></script>
+
+<body>
+<!-- 埋め込みマップのdivタグ。マップサイズはwidth（幅）とheight（高さ）で決まる -->
+<div id='mapcontainer' style='width:100%; height:900px; z-index:0;'></div>
+
+<!-- 以下LeafletのJavaScriptとCSS -->
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.3.0/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.3.0/dist/leaflet.js'></script>
+
+<script>
+function init_map() {
+
+    var map = L.map('mapcontainer');
+    map.setView([35.429448, 135.330490], 14); //初期の中心位置とズームレベルを設定(西舞鶴市を初期値にする)
+
+    //マップタイルを読み込み、引用元を記載する
+    L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', 
+        {attribution: "<a href='https://maps.gsi.go.jp/development/ichiran.html'> ©OpenStreetMap </a>"}).addTo(map);
+
+    //マーカーの画像1 バス１
+        var bus1icon= L.icon({
+	    iconUrl:['./img/bus1icon.png'],
+	    iconSize:[80,50],
+	    iconAnchor:[30,70],
+	    popupAnchor:[0,-70]
+	    });
+
+        //マーカー画像２　バス停
+        var busstopicon= L.icon({
+	    iconUrl:['./img/busstation.png'],
+	    iconSize:[60,80],
+	    iconAnchor:[30,70],
+	    popupAnchor:[0,-70]
+	    });
+
+        //マーカー画像３　園
+        var homeicon= L.icon({
+	    iconUrl:['./img/home1.png'],
+	    iconSize:[60,80],
+	    iconAnchor:[30,70],
+	    popupAnchor:[0,-70]
+	    });
+
+    //マーカーの配置
+        L.marker([35.452868, 135.343627],{ icon: bus1icon })
+        .bindPopup('Hello, world!')
+       .on('contextmenu', function(e){
+           window.open( "https://www.google.co.jp/maps/place/"+e.latlng.lat+","+e.latlng.lng+"/@"+e.latlng.lat+","+e.latlng.lng+",15z/data");
+       }).addTo(map);
+
+    //池内学園 池内幼稚園
+	 L.marker([35.410192, 135.345347],{ icon: homeicon })
+     .bindPopup('池内学園 池内幼稚園<p>〇8:44発</p><p> 〇9:25着</p>')
+       .on('contextmenu', function(e){
+           window.open( "https://www.google.co.jp/maps/place/"+e.latlng.lat+","+e.latlng.lng+"/@"+e.latlng.lat+","+e.latlng.lng+",15z/data");
+       }).addTo(map);
+
+       //京田
+       L.marker([35.422447, 135.329614],{ icon: busstopicon })
+       .bindPopup('京田　<p class="toutyaku">8:48 着</p>')
+       .on('contextmenu', function(e){
+           window.open( "https://www.google.co.jp/maps/place/"+e.latlng.lat+","+e.latlng.lng+"/@"+e.latlng.lat+","+e.latlng.lng+",15z/data");
+       }).addTo(map);
+
+	//原口建設
+       L.marker([35.42706230063325,135.32696664333346],{ icon: busstopicon })
+       .bindPopup('原口建設　<p>8:50 着</p>')
+       .on('contextmenu', function(e){
+           window.open( "https://www.google.co.jp/maps/place/"+e.latlng.lat+","+e.latlng.lng+"/@"+e.latlng.lat+","+e.latlng.lng+",15z/data");
+       }).addTo(map);
+
+	//女布口
+       L.marker([35.426631, 135.324516],{ icon: busstopicon })
+       .bindPopup('女布口 <p>8;51 着</p>')
+       .on('contextmenu', function(e){
+           window.open( "https://www.google.co.jp/maps/place/"+e.latlng.lat+","+e.latlng.lng+"/@"+e.latlng.lat+","+e.latlng.lng+",15z/data");
+       }).addTo(map);
+
+	//女布郵便局前
+       L.marker([35.427940, 135.321086],{ icon: busstopicon })
+       .bindPopup('女布郵便局前 <p>8:52着</p>')
+       .on('contextmenu', function(e){
+           window.open( "https://www.google.co.jp/maps/place/"+e.latlng.lat+","+e.latlng.lng+"/@"+e.latlng.lat+","+e.latlng.lng+",15z/data");
+       }).addTo(map);
+
+       //野村寺
+       L.marker([35.431890, 135.3100471],{ icon: busstopicon })
+       .bindPopup('野村寺 <p>8:56着</p>')
+       .on('contextmenu', function(e){
+           window.open( "https://www.google.co.jp/maps/place/"+e.latlng.lat+","+e.latlng.lng+"/@"+e.latlng.lat+","+e.latlng.lng+",15z/data");
+       }).addTo(map);
+
+       //極楽橋　
+       L.marker([35.433666940204105,135.3256577253342],{ icon: busstopicon })
+       .bindPopup('極楽橋 <p>8:59着</p>')
+       .on('contextmenu', function(e){
+           window.open( "https://www.google.co.jp/maps/place/"+e.latlng.lat+","+e.latlng.lng+"/@"+e.latlng.lat+","+e.latlng.lng+",15z/data");
+       }).addTo(map);
+
+       //寿B
+       L.marker([35.43189672264009,135.3236782550812],{ icon: busstopicon })
+       .bindPopup('寿B <p>9:00着</p>')
+       .on('contextmenu', function(e){
+           window.open( "https://www.google.co.jp/maps/place/"+e.latlng.lat+","+e.latlng.lng+"/@"+e.latlng.lat+","+e.latlng.lng+",15z/data");
+       }).addTo(map);
+
+       //伊佐津A
+       L.marker([35.438325, 135.333298],{ icon: busstopicon })
+       .bindPopup('伊佐津A <p>9:03着</p>')
+       .on('contextmenu', function(e){
+           window.open( "https://www.google.co.jp/maps/place/"+e.latlng.lat+","+e.latlng.lng+"/@"+e.latlng.lat+","+e.latlng.lng+",15z/data");
+       }).addTo(map);
+
+       //伊佐津C
+       L.marker([35.44197551544457,135.33311963081363],{ icon: busstopicon })
+       .bindPopup('伊佐津C <p>9:06着</p>')
+       .on('contextmenu', function(e){
+           window.open( "https://www.google.co.jp/maps/place/"+e.latlng.lat+","+e.latlng.lng+"/@"+e.latlng.lat+","+e.latlng.lng+",15z/data");
+       }).addTo(map);
+
+       //南田辺
+       L.marker([35.443701, 135.332874],{ icon: busstopicon })
+       .bindPopup('南田辺 <p>9:07着</p>')
+       .on('contextmenu', function(e){
+           window.open( "https://www.google.co.jp/maps/place/"+e.latlng.lat+","+e.latlng.lng+"/@"+e.latlng.lat+","+e.latlng.lng+",15z/data");
+       }).addTo(map);
+
+       //朝日生命
+       L.marker([35.438333, 135.328564],{ icon: busstopicon })
+       .bindPopup('朝日生命 <p>9:12着</p>')
+       .on('contextmenu', function(e){
+           window.open( "https://www.google.co.jp/maps/place/"+e.latlng.lat+","+e.latlng.lng+"/@"+e.latlng.lat+","+e.latlng.lng+",15z/data");
+       }).addTo(map);
+
+       //公分名A
+       L.marker([35.435040, 135.328519],{ icon: busstopicon })
+       .bindPopup('公分名A <p>9:14</p>')
+       .on('contextmenu', function(e){
+           window.open( "https://www.google.co.jp/maps/place/"+e.latlng.lat+","+e.latlng.lng+"/@"+e.latlng.lat+","+e.latlng.lng+",15z/data");
+       }).addTo(map);
+
+       //公分名B
+       L.marker([35.432291, 135.328376],{ icon: busstopicon })
+       .bindPopup('公分名B <p>9:15着</p>')
+       .on('contextmenu', function(e){
+           window.open( "https://www.google.co.jp/maps/place/"+e.latlng.lat+","+e.latlng.lng+"/@"+e.latlng.lat+","+e.latlng.lng+",15z/data");
+       }).addTo(map);
+
+       //清水の池
+       L.marker([35.427441, 135.328379],{ icon: busstopicon })
+       .bindPopup('清水の池 <p>9:16着</p>')
+       .on('contextmenu', function(e){
+           window.open( "https://www.google.co.jp/maps/place/"+e.latlng.lat+","+e.latlng.lng+"/@"+e.latlng.lat+","+e.latlng.lng+",15z/data");
+       }).addTo(map);
+
+       //ウメガキ
+       L.marker([35.42660332143552,135.33137083053592],{ icon: busstopicon })
+       .bindPopup('ウメガキ <p>9:18着</p>')
+       .on('contextmenu', function(e){
+           window.open( "https://www.google.co.jp/maps/place/"+e.latlng.lat+","+e.latlng.lng+"/@"+e.latlng.lat+","+e.latlng.lng+",15z/data");
+       }).addTo(map);
+
+    //ラインの表示
+    //倉谷口→園　帰りの方向
+var Line=L.polyline([
+    [35.410192, 135.345347],//園
+    [35.422447, 135.329614],
+    [35.42706230063325,135.32696664333346],//原口建設
+    [35.426631, 135.324516],
+    [35.427940, 135.321086],
+    [35.431890, 135.3100471],//野村寺
+    [35.433666940204105,135.3256577253342],
+    [35.43189672264009,135.3236782550812],
+    [35.438325, 135.333298],//伊佐津A
+    [35.44197551544457,135.33311963081363],
+    [35.443701, 135.332874],
+    [35.438333, 135.328564],//朝日生命
+    [35.435040, 135.328519],
+    [35.432291, 135.328376],
+    [35.427441, 135.328379],//清水の池
+    [35.42660332143552,135.33137083053592],//ウメガキ
+    [35.410192, 135.345347],//園帰
+],{
+    "color": "#00008b",
+    "weight": 5,
+    dashArray: [20, 10]
+
+}).addTo(map);
+
+map.on('click', function(e) {
+    lat = e.latlng.lat;
+    lng = e.latlng.lng;
+    alert("lat: " + lat + ", lng: " + lng);
+} );
+}
+    //ダウンロード時に初期化する
+    window.addEventListener('DOMContentLoaded', init_map());
+
+</script>
+</body>
+</html>

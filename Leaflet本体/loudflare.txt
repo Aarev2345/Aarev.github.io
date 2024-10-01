@@ -1,0 +1,15 @@
+Vercel
+
+Cloudflare
+複数人でのサイト管理も無料
+ログイン kdeamn1
+
+github
+ログインkdeamn1
+pass !
+
+
+GitHub Pagesで静的サイトを構築する
+
+Cloudflareでは、静的サイトを簡単に公開できるプラットフォーム「Cloudflare Pages」を使用することでHTMLをアップロードできます。Cloudflare Pagesでは、デフォルトドメインである「pages.dev」を無償で利用して試すことができます。?
+Cloudflare Pagesでは、静的サイトだけでなく、GitHubと連携して自動的にビルドやデプロイを行うことで動的サイトも公開できます。?
